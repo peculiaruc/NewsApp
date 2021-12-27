@@ -3,10 +3,9 @@ package com.peculiaruc.newsapp.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peculiaruc.newsapp.R
 import com.peculiaruc.newsapp.ui.activity.MainActivity
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_recents_news.*
 class RecentsNewsFragment : Fragment(R.layout.fragment_recents_news) {
 
     private lateinit var viewModel: NewsVeiwModel
-    private lateinit var newAdapter: NewsAdapter
+    private lateinit var newsAdapter: NewsAdapter
 
     val TAG = "RecentNewsFragment"
 
@@ -29,13 +28,25 @@ class RecentsNewsFragment : Fragment(R.layout.fragment_recents_news) {
         viewModel = (activity as MainActivity).viewModel
         setUpRecyclerView()
 
+        //put the article into a bundle and attach the bundle it to the navigation component
+        //the navigation component will then handle the transition and pass the argument to the articlefragment
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("article", it)
+            }
+            findNavController().navigate(
+                R.id.action_recentsNewsFragment_to_articleFragment,
+                bundle
+            )
+        }
+
         //call recent news lifedata
         viewModel.recentNews.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is  Resource.Success ->{
                     hideProgressBar()
                     response.data?.let { newsResponse ->
-                        newAdapter.differ.submitList(newsResponse.articles)
+                        newsAdapter.differ.submitList(newsResponse.articles)
 
                     }
                 }
@@ -63,9 +74,9 @@ class RecentsNewsFragment : Fragment(R.layout.fragment_recents_news) {
 
     //setup recyclerView
     private fun setUpRecyclerView() {
-        newAdapter = NewsAdapter()
+        newsAdapter = NewsAdapter()
         recyclerView_recent.apply {
-            adapter = newAdapter
+            adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }
