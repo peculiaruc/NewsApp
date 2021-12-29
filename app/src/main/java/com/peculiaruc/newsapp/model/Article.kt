@@ -2,13 +2,12 @@ package com.peculiaruc.newsapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.peculiaruc.newsapp.model.Source
 import java.io.Serializable
 
 //set this article gotten from gason response to Entity. No need to create another entitiy
 @Entity(tableName = "article")
-data class Article(
 
+data class Article(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
     val author: String,
@@ -19,4 +18,4 @@ data class Article(
     val title: String,
     val url: String,
     val urlToImage: String
-): Serializable
+) : Serializable
