@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.peculiaruc.newsapp.R
 import com.peculiaruc.newsapp.ui.activity.MainActivity
 import com.peculiaruc.newsapp.util.Resource
+import com.peculiaruc.newsapp.util.openWebPage
 import com.peculiaruc.newsapp.viewModel.NewsVeiwModel
 import com.peculiaruc.thenews.ui.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_recents_news.*
@@ -28,18 +29,19 @@ class RecentsNewsFragment : Fragment(R.layout.fragment_recents_news) {
 
         viewModel = (activity as MainActivity).viewModel
         setUpRecyclerView()
+        openNewsUrl()
 
         //put the article into a bundle and attach the bundle it to the navigation component
         //the navigation component will then handle the transition and pass the argument to the articlefragment
-        newsAdapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("article", it)
-            }
-            findNavController().navigate(
-                R.id.action_recentsNewsFragment_to_articleFragment,
-                bundle
-            )
-        }
+//        newsAdapter.setOnItemClickListener {
+//            val bundle = Bundle().apply {
+//                putSerializable("article", it)
+//            }
+//            findNavController().navigate(
+//                R.id.action_recentsNewsFragment_to_articleFragment,
+//                bundle
+//            )
+//        }
 
         //call recent news lifedata
         viewModel.recentNews.observe(viewLifecycleOwner, Observer { response ->
@@ -71,6 +73,12 @@ class RecentsNewsFragment : Fragment(R.layout.fragment_recents_news) {
 
     private fun showProgressBar() {
         pageProgressBar.visibility = View.VISIBLE
+    }
+
+    private fun openNewsUrl(){
+        newsAdapter.setOnItemClickListener {
+            openWebPage(it ?: " ")
+        }
     }
 
     //setup recyclerView

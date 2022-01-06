@@ -11,15 +11,15 @@ import com.peculiaruc.newsapp.R
 import com.peculiaruc.newsapp.model.Article
 import kotlinx.android.synthetic.main.list_news_item.view.*
 
-class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticlesViewHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticlesViewHolder>() {
 
-    private val differCallback = object : DiffUtil.ItemCallback<Article>(){
+    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.url == newItem.url
         }
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-          return oldItem == newItem
+            return oldItem == newItem
         }
     }
 
@@ -28,24 +28,28 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticlesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
         return ArticlesViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.list_news_item, parent, false) )
+                R.layout.list_news_item, parent, false
+            )
+        )
     }
 
-    private var onItemClickListener: ((Article) -> Unit)? = null
+    private var onItemClickListener: ((String?) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
         val article = differ.currentList[position]
 
         holder.itemView.apply {
-           Glide.with(this).load(article.urlToImage).into(article_img)
-        news_source.text = article.source.name
-        news_title.text = article.title
-        news_description.text = article.description
-        news_published.text = article.publishedAt
+            Glide.with(this).load(article.urlToImage).into(article_img)
+            news_source.text = article.source.name
+            news_title.text = article.title
+            news_description.text = article.description
+            news_published.text = article.publishedAt
 
-          setOnItemClickListener {
-              onItemClickListener?.let { it(article) }
-          }
+            constraint.setOnClickListener {
+                onItemClickListener?.let {
+                    it(article.url)
+                }
+            }
         }
     }
 
@@ -53,11 +57,11 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticlesViewHolder>() {
         return differ.currentList.size
     }
 
-    inner class ArticlesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
+    inner class ArticlesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
 
-    fun setOnItemClickListener(listener: (Article) -> Unit) {
+    fun setOnItemClickListener(listener: (String?) -> Unit) {
         onItemClickListener = listener
     }
 }

@@ -4,11 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/drawable/recent_news.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/drawable/search_layout_background.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_article.xml" value="0.1" />
         <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_recents_news.xml" value="0.1" />
         <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_saved_news.xml" value="0.1" />
-        <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_search_news.xml" value="0.1" />
+        <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_search_news.xml" value="0.25" />
         <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/layout/list_news_item.xml" value="0.33" />
         <entry key="..\:/Users/Peculiaruc/AndroidStudioProjects/NewsApp/app/src/main/res/menu/news_menu.xml" value="0.1" />
       </map>

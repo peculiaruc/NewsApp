@@ -24,12 +24,12 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
 
         viewModel = (activity as MainActivity).viewModel
         //get the articles
-        val article = args.article
+       // val article = args.article
 
         // display the article in the webview
         webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(article.url)
+          //  loadUrl(article.url)
         }
 
 

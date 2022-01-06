@@ -22,10 +22,10 @@ interface NewsApi {
 
     ): Response<NewsResponse>
 
-    @GET("v2/everything")
+    @GET("v2/top-headlines")
     suspend fun searchAllNews(
-        @Query("country")
-        countryCode: String,
+        @Query("q")
+        searchWord: String,
 
         @Query("page")
         pageNum: Int = 1,
